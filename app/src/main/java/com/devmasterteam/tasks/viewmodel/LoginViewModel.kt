@@ -13,6 +13,7 @@ import com.devmasterteam.tasks.service.repository.PersonRepository
 import com.devmasterteam.tasks.service.repository.PriorityRepository
 import com.devmasterteam.tasks.service.repository.SecurityPreferences
 import com.devmasterteam.tasks.service.repository.remote.RetrofitClient
+import kotlin.math.log
 
 class LoginViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -20,10 +21,8 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
     private val priorityRepository = PriorityRepository(application.applicationContext)
     private val securityPreferences = SecurityPreferences(application.applicationContext)
 
-
     private val _login = MutableLiveData<ValidationModel>()
     val login: LiveData<ValidationModel> = _login
-
 
     private val _loggedUser = MutableLiveData<Boolean>()
     val loggedUser: LiveData<Boolean> = _loggedUser
@@ -33,7 +32,7 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
      */
     fun doLogin(email: String, password: String) {
         personRepository.login(email, password, object : APIListener<PersonModel> {
-            override fun onSucess(result: PersonModel) {
+            override fun onSuccess(result: PersonModel) {
                 securityPreferences.store(TaskConstants.SHARED.TOKEN_KEY, result.token)
                 securityPreferences.store(TaskConstants.SHARED.PERSON_KEY, result.personKey)
                 securityPreferences.store(TaskConstants.SHARED.PERSON_NAME, result.name)
@@ -46,7 +45,6 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
             override fun onFailure(message: String) {
                 _login.value = ValidationModel(message)
             }
-
         })
     }
 
@@ -59,21 +57,21 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
 
         RetrofitClient.addHeaders(token, person)
 
+        // Se token e person key forem diferentes de vazio, usuário está logado
         val logged = (token != "" && person != "")
-
         _loggedUser.value = logged
 
-        if(!logged){
+        // Se usuário não estiver logado, aplicação vai atualizar os dados
+        if (!logged) {
             priorityRepository.list(object : APIListener<List<PriorityModel>>{
-                override fun onSucess(result: List<PriorityModel>) {
+                override fun onSuccess(result: List<PriorityModel>) {
                     priorityRepository.save(result)
                 }
 
                 override fun onFailure(message: String) {
-                    val s = ""
                 }
             })
-
         }
     }
+
 }

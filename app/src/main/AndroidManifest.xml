@@ -3,6 +3,7 @@
     package="com.devmasterteam.tasks">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -10,8 +11,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/Theme.Tasks">
+        android:theme="@style/Theme.Tasks"
+        android:usesCleartextTraffic="true">
         <activity
             android:name=".view.RegisterActivity"
             android:exported="true" />

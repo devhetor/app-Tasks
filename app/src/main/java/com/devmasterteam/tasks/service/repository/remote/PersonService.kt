@@ -8,7 +8,6 @@ import retrofit2.http.POST
 
 interface PersonService {
 
-    //http://devmasterteam.com/CursoAndroidAPI/Authentication/Create
     @POST("Authentication/Login")
     @FormUrlEncoded
     fun login(
@@ -19,22 +18,9 @@ interface PersonService {
     @POST("Authentication/Create")
     @FormUrlEncoded
     fun create(
+        @Field("name") name: String,
         @Field("email") email: String,
-        @Field("password") password: String,
-        @Field("name") name: String
+        @Field("password") password: String
     ): Call<PersonModel>
 
 }
-
-/*
-
-{
-heitorbrandolin@gmaiil.com
-123abc
-
-    "name": "heitor",
-    "token": "QqlQ2s0tgfWg+/H3ydL2f6zZYQAH9BvkOm7QusW9GL27Ib9+/HYCfN8eHUm2DusL",
-    "personKey": "QoodFVbVu1uCQvCUqkJyqxtkLGAtyHu/84iEYeECFVU="
-}
-
- */
