@@ -31,6 +31,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
         viewModel.verifyLoggedUser()
 
+        supportActionBar?.hide()
+
         // Observadores
         observe()
     }

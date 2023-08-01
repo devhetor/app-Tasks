@@ -9,6 +9,8 @@
 
     <EditText
         android:id="@+id/edit_name"
+        android:drawableStart="@drawable/ic_name"
+        android:drawablePadding="8dp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -20,6 +22,8 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
+        android:drawableStart="@drawable/ic_mail"
+        android:drawablePadding="8dp"
         android:id="@+id/edit_email"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -31,6 +35,8 @@
         app:layout_constraintTop_toBottomOf="@id/edit_name" />
 
     <EditText
+        android:drawableStart="@drawable/ic_lock"
+        android:drawablePadding="8dp"
         android:id="@+id/edit_password"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -42,6 +48,7 @@
         app:layout_constraintTop_toBottomOf="@id/edit_email" />
 
     <Button
+        style="@style/DefaultButton"
         android:id="@+id/button_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
